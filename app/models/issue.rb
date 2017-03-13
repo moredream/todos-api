@@ -22,8 +22,8 @@ class Issue < ApplicationRecord
 		end
 	end
 
-	def self.getIssueLater(id)
-		@client = GithubClient.new({owner: "plataformatec", repo:"devise", number: 2692})
+	def self.getIssueLater(params)
+		@client = GithubClient.new(params)
 		comments = @client.comments
 
 		comments.each do |comment|
