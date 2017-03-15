@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-  before_action :set_issue, only: [:show, :update, :destroy]
+#  before_action :set_issue, only: [:show, :update, :destroy]
 
   # GET /issues
   def index
@@ -9,32 +9,16 @@ class IssuesController < ApplicationController
 
   # POST /issues
   def create
-    @issue = Issue.create!(issue_params)
+    @issue = Issue.getIssue(issue_params)
     json_response(@issue, :created)
-  end
-
-  # GET /issues/:id
-  def show
-    json_response(@issue)
-  end
-
-  # PUT /issues/:id
-  def update
-    @issue.update(issue_params)
-    head :no_content
-  end
-
-  # DELETE /issues/:id
-  def destroy
-    @issue.destroy
-    head :no_content
   end
 
   private
 
   def issue_params
     # whitelist params
-    params.permit(:title, :created_by)
+    #params {owner: "plataformatec", repo:"devise", number: 2692}
+    params.permit(:owner, :repo, :number)
   end
 
   def set_issue

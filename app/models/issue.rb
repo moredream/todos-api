@@ -20,6 +20,7 @@ class Issue < ApplicationRecord
 											body:  comment["body"] }
 			Issue.create(issue_args)
 		end
+
 	end
 
 	def self.getIssueLater(params)
@@ -32,13 +33,8 @@ class Issue < ApplicationRecord
 											 user_name: comment["user"]["login"],
 											 user_id: comment["user"]["id"],
 											 body:  comment["body"] }
-			# Issue.create(issue_args)
 			IssueCollectorJob.perform_later issue_args
-
 		end
-
-		#IssueCollectorJob.perform_later args
-
 	end
 
   # def getIssue(id)
